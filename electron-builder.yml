@@ -1,5 +1,5 @@
-appId: com.ddcom
-productName: ddcom
+appId: com.react-electron
+productName: react-electron
 directories:
   output: release-builds
 icon: public/icon-256x256.ico
