@@ -1,6 +1,6 @@
-import {type ReactNode, StrictMode, useState} from 'react'
+import {type ReactNode, StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {BrowserRouter, HashRouter, useLocation} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import './index.scss'
 import App from './app/App'
 import {isElectron} from "./app/app-func";
