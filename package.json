@@ -5,25 +5,28 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
+	"main": "electron/main.js",
+	"author": "",
 	"license": "UNLICENSED",
 	"scripts": {
 		"dev": "vite",
-		"preview": "vite preview",
 		"build": "tsc -b && vite build",
-		"start": "npm run build && electron .",
+		"build:preview": "vite preview",
+		"electron:dev": "cross-env BUILD_TARGET=electron yarn build && electron .",
+		"electron:dev-wath": "cross-env BUILD_TARGET=electron concurrently \"vite build --watch\" \"electron .\"",
+		"electron:build": "yarn clean && cross-env BUILD_TARGET=electron yarn build && electron-builder",
 		"lint": "eslint .",
 		"format": "prettier --write ./src",
-		"clean": "node clean.cjs"
-	},
-	"main": "electron/main.js",
-	"author": {
-		"name": "author",
-		"email": "test@hotmail.com"
+		"clean": "node ./scripts/clean.cjs"
 	},
 	"dependencies": {
+		"axios": "^1.13.5",
+		"clsx": "^2.1.1",
 		"electron-is-dev": "^3.0.1",
+		"loglevel": "^1.9.2",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
+		"react-router-dom": "^7.13.0",
 		"swr": "^2.3.4"
 	},
 	"devDependencies": {
@@ -31,8 +34,8 @@
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"@vitejs/plugin-react": "^4.6.0",
-		"concurrently": "^9.2.0",
-		"cross-env": "^10.0.0",
+		"concurrently": "^9.2.1",
+		"cross-env": "^10.1.0",
 		"electron": "^37.2.5",
 		"electron-builder": "^26.0.12",
 		"eslint": "^9.30.1",

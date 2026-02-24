@@ -1,19 +1,25 @@
+// https://vite.dev/config/
+
 import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
-export default defineConfig({
-	plugins: [react()],
-	base: './', // fixed index.html having sources start with "/" instead of "./" which breaks everything except root deployment
-	css: {
-		modules: {
-			localsConvention: 'camelCaseOnly',
-			// or: 'camelCase' (keeps kebab-case too)
+export default defineConfig(({mode}) => {
+	const isElectron = process.env.BUILD_TARGET === "electron";
+
+	return {
+		plugins: [react()],
+		base: './', // fixed index.html having sources start with "/" instead of "./" which breaks everything except root deployment
+		define: {
+			__ELECTRON__: JSON.stringify(isElectron)
 		},
-	},
-	build: {
-		outDir: 'dist',
-		chunkSizeWarningLimit: 10000
+		css: {
+			modules: {
+				localsConvention: 'camelCaseOnly', // or: 'camelCase' (keeps kebab-case too)
+			},
+		},
+		build: {
+			outDir: 'dist',
+			chunkSizeWarningLimit: 10000
+		}
 	}
 })
-

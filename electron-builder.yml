@@ -7,8 +7,12 @@ asar: false
 files:
   - 'dist/**'
   - 'electron/**'
+  - '!semantic/**'
+  - '!doc/**'
   - '!node_modules/**'
+  - '!.idea/**'
   - '!**/node_modules/**'
+  - '!scripts/**'
 mac:
   target: dmg
 win:

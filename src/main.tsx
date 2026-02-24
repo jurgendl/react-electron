@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {type ReactNode, StrictMode, useState} from 'react'
+import {createRoot} from 'react-dom/client'
+import {BrowserRouter, HashRouter, useLocation} from "react-router-dom";
 import './index.scss'
-import App from './App.tsx'
+import App from './app/App'
+import {isElectron} from "./app/app-func";
+
+export function AppRouter({children}: { children: ReactNode }) {
+	const Router = isElectron() ? HashRouter : BrowserRouter;
+	return <Router>{children}</Router>;
+}
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+	<StrictMode>
+		<AppRouter>
+			<App />
+		</AppRouter>
+	</StrictMode>,
 )
