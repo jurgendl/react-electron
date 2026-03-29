@@ -1,7 +1,21 @@
 import {app, BrowserWindow, Menu, ShareMenu, clipboard, nativeTheme} from 'electron';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import isDev from 'electron-is-dev';
+
+// this doesn't work when running on other computers
+// err_module_not_found: cannot find package 'electron-is-dev' imported from resources/app/electron/main.js
+//
+// import isDev from 'electron-is-dev';
+//
+//package.json
+// "dependencies": {"electron-is-dev": "^3.0.1"}
+//
+// electron-builder.yml:
+//files:
+//  - '!node_modules/**'
+//  - '!**/node_modules/**'
+
+const dev = !app.isPackaged;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,8 +26,6 @@ console.log('App is packaged?', app.isPackaged);
 // vite build → NODE_ENV=production
 // vite preview → NODE_ENV=production
 console.log('NODE_ENV',process.env.NODE_ENV);
-
-const dev = isDev;
 
 //if(dev) console.log("process", process);
 if(dev) console.log("__dirname", __dirname);// electron
