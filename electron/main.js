@@ -2,6 +2,9 @@ import {app, BrowserWindow, Menu, ShareMenu, clipboard, nativeTheme} from 'elect
 import path from 'path';
 import {fileURLToPath} from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // this doesn't work when running on other computers
 // err_module_not_found: cannot find package 'electron-is-dev' imported from resources/app/electron/main.js
 //
@@ -16,13 +19,9 @@ import {fileURLToPath} from 'url';
 //  - '!**/node_modules/**'
 
 const dev = !app.isPackaged;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 console.log('App is packaged?', app.isPackaged);
 
-    // vite → NODE_ENV=development
+// vite → NODE_ENV=development
 // vite build → NODE_ENV=production
 // vite preview → NODE_ENV=production
 console.log('NODE_ENV',process.env.NODE_ENV);
